@@ -1,0 +1,7 @@
+# info
+
+## sensors
+* chamber thermistor: semitec 103NT-4
+
+## power
+* main fuse: 8A, slow blow (1.2mm panel)
