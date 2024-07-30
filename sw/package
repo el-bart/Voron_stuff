@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eu -o pipefail
+
+app_dir=$(dirname "$(readlink -e "$0")")
+cd "$app_dir"
+
+rm -rf build
+mkdir build
+
