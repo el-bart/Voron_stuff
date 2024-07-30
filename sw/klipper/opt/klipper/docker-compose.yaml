@@ -1,0 +1,12 @@
+services:
+
+  klipper:
+    build: klipper
+    #restart: unless-stopped
+    #privileged: true
+    volumes:
+      - /dev:/dev
+      - ./config:/opt/printer_data/config
+      - run:/opt/printer_data/run
+      - gcode:/opt/printer_data/gcodes
+      - log:/opt/printer_data/logs
