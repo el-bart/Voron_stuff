@@ -1,0 +1,8 @@
+Package: klipper
+Description: package for dockerizer Klipper installation along with whole ecosystem (Moonraker, KlipperScreen)
+Architecture: all
+Version: 0.0.0
+Maintainer: basz@localhost
+Depends: docker.io,
+         docker-compose,
+         bash
