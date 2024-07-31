@@ -5,4 +5,11 @@ Version: 0.0.0
 Maintainer: basz@localhost
 Depends: docker.io,
          docker-compose,
+         xinit,
+         xinput,
+         x11-xserver-utils,
+         xserver-xorg-input-evdev,
+         xserver-xorg-input-libinput,
+         xserver-xorg-legacy,
+         xserver-xorg-video-fbdev,
          bash
