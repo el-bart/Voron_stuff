@@ -12,5 +12,5 @@ then
 fi
 
 systemctl daemon-reload
-systemctl enable x11kiosk
-systemctl start  x11kiosk
+systemctl enable getty@tty1
+systemctl start  getty@tty1

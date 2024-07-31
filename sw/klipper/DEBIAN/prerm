@@ -1,6 +1,6 @@
 #!/bin/bash
-systemctl stop x11kiosk
-systemctl disable x11kiosk
+systemctl stop    getty@tty1
+systemctl disable getty@tty1
 
 # this script may never fail
 exit 0
