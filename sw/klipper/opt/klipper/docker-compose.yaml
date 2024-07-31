@@ -2,8 +2,6 @@ services:
 
   klipper:
     build: klipper
-    #restart: unless-stopped
-    privileged: true # TODO
     group_add:
       - dialout
     devices:
