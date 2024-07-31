@@ -24,6 +24,7 @@ RUN apt-get update && \
       wireless-tools \
       curl \
       build-essential \
+      iproute2 \
       && \
     apt-get clean
 
@@ -35,9 +36,3 @@ ENTRYPOINT ["venv/bin/moonraker", \
               "--datapath", "/mnt/data", \
               "--logfile", "/mnt/logs/moonraker.log", \
               "--unixsocket", "/mnt/run/moonraker.sock" ]
-
-RUN apt-get update && \
-    apt-get install -y \
-      iproute2 \
-      && \
-    apt-get clean
