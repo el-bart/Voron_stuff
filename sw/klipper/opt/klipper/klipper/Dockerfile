@@ -43,4 +43,5 @@ RUN python3 -m venv venv && \
 ENTRYPOINT ["python3", "/opt/klipper/klippy/klippy.py", \
               "--input-tty", "/mnt/run/klipper.tty", \
               "--api-server", "/mnt/run/klipper.sock", \
+              "--logfile", "/mnt/logs/klipper.log", \
               "/mnt/config/printer.cfg" ]
