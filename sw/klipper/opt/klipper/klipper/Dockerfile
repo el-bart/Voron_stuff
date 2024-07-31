@@ -31,6 +31,7 @@ RUN apt-get update && \
       python3-greenlet \
       python3-cffi \
       python3-serial \
+      python3-jinja2 \
       && \
     apt-get clean
 
