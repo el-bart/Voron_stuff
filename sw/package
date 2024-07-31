@@ -6,5 +6,8 @@ cd "$app_dir"
 
 rm -rf build
 mkdir build
-dpkg-deb --build klipper build/klipper.deb
+dpkg-deb \
+  --root-owner-group \
+  --build klipper \
+  build/klipper.deb
 ls -alh "$_"
