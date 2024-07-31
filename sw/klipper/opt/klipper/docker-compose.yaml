@@ -23,3 +23,5 @@ services:
       - ./moonraker/data/config:/mnt/config
       - ./moonraker/data/logs:/mnt/logs
       - ./moonraker/data/data:/mnt/data
+
+# TODO: add nginx for reverse proxy (HTTPS + basic-auth / mTLS)
