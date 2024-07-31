@@ -29,7 +29,7 @@ RUN apt-get update && \
     apt-get clean
 
 RUN python3 -m venv venv && \
-    venv/bin/pip install moonraker==0.9
+    venv/bin/pip install moonraker==0.9.2
 
 ENTRYPOINT ["venv/bin/moonraker", \
               "--configfile", "/mnt/config/moonraker.cfg", \
