@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eu -o pipefail
+
+user=klipperscreen
+if ! id "$user" > /dev/null 2>&1
+then
+  adduser \
+    --shell /bin/bash \
+    --disabled-password \
+    "$user" \
+    < /dev/null
+fi
+
+systemctl daemon-reload
+systemctl enable x11kiosk
+systemctl start  x11kiosk

@@ -1,0 +1,6 @@
+#!/bin/bash
+systemctl daemon-reload
+deluser "$klipperscreen"
+
+# this script may never fail
+exit 0

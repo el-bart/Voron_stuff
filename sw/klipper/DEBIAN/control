@@ -13,4 +13,5 @@ Depends: docker.io,
          xserver-xorg-input-libinput,
          xserver-xorg-legacy,
          xserver-xorg-video-fbdev,
+         unclutter,
          bash
