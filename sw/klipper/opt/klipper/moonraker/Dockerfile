@@ -28,6 +28,16 @@ RUN apt-get update && \
     apt-get clean
 
 RUN python3 -m venv venv && \
-    venv/bin/pip install moonraker
+    venv/bin/pip install moonraker==0.9
 
-ENTRYPOINT ["python3", "moonraker" ]
+ENTRYPOINT ["venv/bin/moonraker", \
+              "--configfile", "/mnt/config/moonraker.cfg", \
+              "--datapath", "/mnt/data", \
+              "--logfile", "/mnt/logs/moonraker.log", \
+              "--unixsocket", "/mnt/run/moonraker.sock" ]
+
+RUN apt-get update && \
+    apt-get install -y \
+      iproute2 \
+      && \
+    apt-get clean
