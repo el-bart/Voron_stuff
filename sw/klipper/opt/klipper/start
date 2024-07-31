@@ -1,0 +1,4 @@
+#!/bin/bash
+app_dir=$(dirname "$(readlink -e "$0")")
+cd "$app_dir"
+exec docker-compose up -t 0 --build
