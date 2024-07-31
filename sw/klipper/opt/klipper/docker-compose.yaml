@@ -12,3 +12,10 @@ services:
       - ./klipper/data/config:/mnt/config
       - ./klipper/data/gcode:/mnt/gcodes:ro
       - ./klipper/data/logs:/mnt/logs
+
+  moonraker:
+    build: moonraker
+    volumes:
+      - /var/run/klipper/klipper:/mnt/klipper
+      - ./moonraker/data/config:/mnt/config
+      - ./moonraker/data/logs:/mnt/logs
