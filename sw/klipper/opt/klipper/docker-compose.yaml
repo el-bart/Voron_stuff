@@ -3,10 +3,14 @@ services:
   klipper:
     build: klipper
     #restart: unless-stopped
-    #privileged: true
+    privileged: true # TODO
+    group_add:
+      - dialout
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
     volumes:
-      - /dev:/dev
-      - ./config:/opt/printer_data/config
-      - run:/opt/printer_data/run
-      - gcode:/opt/printer_data/gcodes
-      - log:/opt/printer_data/logs
+      - /dev/serial/by-id:/dev/serial/by-id:ro
+      - /var/run/klipper/klipper:/mnt/run
+      - ./klipper/data/config:/mnt/config
+      - ./klipper/data/gcode:/mnt/gcodes:ro
+      - ./klipper/data/logs:/mnt/logs
