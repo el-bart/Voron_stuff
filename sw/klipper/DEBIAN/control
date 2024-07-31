@@ -5,6 +5,7 @@ Version: 0.0.0
 Maintainer: basz@localhost
 Depends: docker.io,
          docker-compose,
+         matchbox,
          xinit,
          xinput,
          x11-xserver-utils,
