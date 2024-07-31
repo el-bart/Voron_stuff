@@ -17,11 +17,27 @@ services:
   moonraker:
     build: moonraker
     # TODO: run as non-root
+    network_mode: host
     volumes:
       - /var/run/klipper/moonraker:/mnt/run
       - /var/run/klipper/klipper:/mnt/klipper/run/klipper.sock
       - ./moonraker/data/config:/mnt/config
       - ./moonraker/data/logs:/mnt/logs
       - ./moonraker/data/data:/mnt/data
+
+  klipperscreen:
+    build: klipperscreen
+    # TODO: run as non-root
+    network_mode: host
+    environment:
+      - DISPLAY=:0
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.Xauthority
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /var/run/klipper/moonraker:/mnt/run
+      #- /var/run/klipper/klipper:/mnt/klipper/run/klipper.sock
+      - ./klipperscreen/data/config:/mnt/config
+      - ./klipperscreen/data/logs:/mnt/logs
 
 # TODO: add nginx for reverse proxy (HTTPS + basic-auth / mTLS)
