@@ -1,4 +1,17 @@
 #!/bin/bash
 app_dir=$(dirname "$(readlink -e "$0")")
 cd "$app_dir"
+
+# TODO: temporary workaround
+if [ -z "${DISPLAY:-}" ]
+then
+  export DISPLAY=:0
+fi
+
+while ! xrandr
+do
+  echo "$app: waiting for X11 to be up and running..." >&2
+  sleep 1
+done
+
 exec docker-compose up --timeout 2 --build

@@ -12,5 +12,10 @@ then
 fi
 
 systemctl daemon-reload
-systemctl enable getty@tty1
-systemctl start  getty@tty1
+for s in \
+  getty@tty1 \
+  klipper-dc
+do
+  systemctl enable "$s"
+  systemctl start  "$s"
+done

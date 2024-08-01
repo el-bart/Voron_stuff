@@ -1,0 +1,16 @@
+[Unit]
+Description=Klipper, Moonraker, KlipperScreen - running under docker-compose
+StartLimitIntervalSec=0
+After=getty@tty1.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+# TODO: should be ran as non-root
+User=root
+ExecStart=/opt/klipper/start
+ExecStop=/opt/klipper/stop
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,11 @@
 #!/bin/bash
-systemctl stop    getty@tty1
-systemctl disable getty@tty1
+for s in \
+  klipper-dc \
+  getty@tty1
+do
+  systemctl disable "$s"
+  systemctl stop    "$s"
+done
 
 # this script may never fail
 exit 0
