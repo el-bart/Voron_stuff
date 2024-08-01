@@ -38,6 +38,12 @@ RUN git clone \
 RUN python3 -m venv venv && \
     venv/bin/pip install -r "/opt/klipperscreen/scripts/KlipperScreen-requirements.txt"
 
+RUN apt-get update && \
+    apt-get install -y \
+      x11-xserver-utils \
+      && \
+    apt-get clean
+
 ENTRYPOINT ["venv/bin/python", "/opt/klipperscreen/screen.py", \
               "--configfile", "/mnt/config/klipperscreen.cfg", \
               "--logfile", "/mnt/logs/klipperscreen.log" ]
