@@ -10,16 +10,37 @@ cd "$app_dir"
   mkdir -p  "$cert_dir"
   chmod 700 "$cert_dir"
 
+  # generate DH params
   dh="$cert_dir/dhparam.pem"
   if ! [ -f "$dh" ]
   then
-    echo "$app: Diffie-Hellman parameter file is not there - generating (be patiend - this can take time)"
+    echo "$app: Diffie-Hellman parameter file is not there - generating new one"
+    echo "$app: this is a VERY CPU-intensive process! you may want to generate this on your PC and copy to $dh instead"
     rm -f "$dh.tmp"
-    openssl dhparam -out "$dh.tmp" 4096
+    time openssl dhparam -out "$dh.tmp" 4096
     mv "$dh.tmp" "$dh"
   fi
 
-  # TODO: generate server cert and key (self-signed)
+  # generate cert+key pair
+  for host in moonraker fluidd
+  do
+    key="$cert_dir/$host.key"
+    crt="$cert_dir/$host.crt"
+    [ -f "$key" ] && continue
+    echo "$app: key+cert for host '$host' is missing - generating now"
+    time openssl req \
+      -x509 \
+      -newkey "rsa:4096" \
+      -keyout "$key.tmp" \
+      -out "$crt.tmp" \
+      -sha256 \
+      -days 3650 \
+      -nodes \
+      -subj "/C=XX/ST=StateName/L=CityName/O=CompanyName/OU=CompanySectionName/CN=$host" \
+      -addext "subjectAltName=DNS:$host-voron24,DNS:$host-voron24.hellbound"
+    mv "$key.tmp" "$key"
+    mv "$crt.tmp" "$crt"
+  done
 )
 
 # configure API key, if it's not there yet
