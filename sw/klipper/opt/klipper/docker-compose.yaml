@@ -24,6 +24,8 @@ services:
       - ./moonraker/data/config:/mnt/config
       - ./moonraker/data/logs:/mnt/logs
       - ./moonraker/data/data:/mnt/data
+    depends_on:
+      - klipper
 
   klipperscreen:
     build: klipperscreen
@@ -34,10 +36,15 @@ services:
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.Xauthority
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/klipper/moonraker:/mnt/run
-      #- /var/run/klipper/klipper:/mnt/klipper/run/klipper.sock
       - ./klipperscreen/data/config:/mnt/config
       - ./klipperscreen/data/logs:/mnt/logs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /etc/localtime:/etc/localtime:ro
+      # following 2 entries allow for OS shutdown / restart from touch screen
+      - /run/dbus:/run/dbus
+      - /run/systemd:/run/systemd
+    depends_on:
+      - moonraker
 
 # TODO: add nginx for reverse proxy (HTTPS + basic-auth / mTLS)
