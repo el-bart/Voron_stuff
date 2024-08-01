@@ -31,6 +31,18 @@ RUN apt-get update && \
 RUN python3 -m venv venv && \
     venv/bin/pip install moonraker==0.9.2
 
+# needed for /opt/klipper/docs...
+RUN apt-get update && \
+    apt-get install -y \
+      git \
+      && \
+    apt-get clean
+RUN git clone \
+          "https://github.com/Klipper3d/klipper" \
+          "/opt/klipper" && \
+    cd "/opt/klipper" && \
+    git checkout --quiet "12cd1d9e81c32b26ccc319af1dfc3633438908f1"
+
 ENTRYPOINT ["venv/bin/moonraker", \
               "--configfile", "/mnt/config/moonraker.cfg", \
               "--datapath", "/mnt/data", \

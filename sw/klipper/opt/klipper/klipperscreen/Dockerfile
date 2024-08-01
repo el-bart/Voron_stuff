@@ -44,13 +44,6 @@ RUN apt-get update && \
       && \
     apt-get clean
 
-# needed for /opt/klipper/docs...
-RUN git clone \
-          "https://github.com/Klipper3d/klipper" \
-          "/opt/klipper" && \
-    cd "/opt/klipper" && \
-    git checkout --quiet "12cd1d9e81c32b26ccc319af1dfc3633438908f1"
-
 ENTRYPOINT ["venv/bin/python", "/opt/klipperscreen/screen.py", \
               "--configfile", "/mnt/config/klipperscreen.cfg", \
               "--logfile", "/mnt/logs/klipperscreen.log" ]
