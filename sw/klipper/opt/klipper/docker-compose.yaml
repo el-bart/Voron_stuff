@@ -26,7 +26,6 @@ services:
       - ./moonraker/data/logs:/mnt/logs
       - ./moonraker/data/data:/mnt/data
       - ./klipper/data/config:/opt/klipper/config:ro # does not seem to to configurable in moonraker
-    # TODO: add HTTPS reverse proxy on nginx
     depends_on:
       - klipper
 
@@ -66,5 +65,3 @@ services:
     depends_on:
       - moonraker
       - fluidd
-
-# TODO: add nginx for reverse proxy (HTTPS + basic-auth / mTLS)
