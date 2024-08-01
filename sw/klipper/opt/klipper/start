@@ -17,9 +17,15 @@ fi
   placeholder="MOONRAKER_API_KEY_PLACEHOLDER"
   if grep -q "$placeholder" "$cfg"
   then
-    echo "$app: substituting moonraker's key placeholder with actual API key"
     db="/opt/klipper/moonraker/data/data/database/moonraker-sql.db"
     query='SELECT password FROM authorized_users WHERE username="_API_KEY_USER_";'
+    if ! [ -f "$db" ]
+    then
+      echo "$app: WARNING: moonraker was never before - API key is not there" >&2
+      echo "$app: WARNING: proceeding anyway - key should be available after restart or manual key setup" >&2
+      exit 0
+    fi
+    echo "$app: substituting moonraker's key placeholder with actual API key"
     key=$(sqlite3 "$db" "$query")
     sed -i "s#$placeholder#$key#" "$cfg"
   fi
