@@ -4,12 +4,6 @@ app=$(basename "$0")
 app_dir=$(dirname "$(readlink -e "$0")")
 cd "$app_dir"
 
-# TODO: temporary workaround
-if [ -z "${DISPLAY:-}" ]
-then
-  export DISPLAY=:0
-fi
-
 # configure API key, if it's not there yet
 (
   set +x # just in case
@@ -31,10 +25,18 @@ fi
   fi
 )
 
+# TODO: temporary workaround
+if [ -z "${DISPLAY:-}" ]
+then
+  export DISPLAY=:0
+fi
+
+# make sure X11 is up
 while ! xrandr
 do
   echo "$app: waiting for X11 to be up and running..." >&2
   sleep 1
 done
 
+# start the system
 exec docker-compose up --timeout 2 --build
