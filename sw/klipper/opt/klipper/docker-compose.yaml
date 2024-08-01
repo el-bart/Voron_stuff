@@ -53,7 +53,22 @@ services:
   fluidd:
     image: ghcr.io/fluidd-core/fluidd:v1.30.1
     restart: always
+#    ports:
+#      - 127.0.0.1:80:80 # TODO: add reverse proxy, to make sure correct content is immediately available
+
+  nginx:
+    image: nginx:1.27
+    restart: always
+    volumes:
+      - ./nginx/http2https.conf:/etc/nginx/sites-enabled/http2https.conf:ro
+      - ./nginx/moonraker.conf:/etc/nginx/sites-enabled/moonraker.conf:ro
+      - ./nginx/fluidd.conf:/etc/nginx/sites-enabled/fluidd.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
     ports:
-      - 127.0.0.1:80:80 # TODO: add reverse proxy, to make sure correct content is immediately available
+      - 80:80
+      - 443:443
+    depends_on:
+      - moonraker
+      - fluidd
 
 # TODO: add nginx for reverse proxy (HTTPS + basic-auth / mTLS)
