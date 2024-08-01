@@ -33,7 +33,7 @@ RUN git clone \
           "https://github.com/KlipperScreen/KlipperScreen.git" \
           "/opt/klipperscreen" && \
     cd "/opt/klipperscreen" && \
-    git checkout "v0.4.3"
+    git checkout --quiet "v0.4.3"
 
 RUN python3 -m venv venv && \
     venv/bin/pip install -r "/opt/klipperscreen/scripts/KlipperScreen-requirements.txt"
@@ -43,6 +43,13 @@ RUN apt-get update && \
       x11-xserver-utils \
       && \
     apt-get clean
+
+# needed for /opt/klipper/docs...
+RUN git clone \
+          "https://github.com/Klipper3d/klipper" \
+          "/opt/klipper" && \
+    cd "/opt/klipper" && \
+    git checkout --quiet "12cd1d9e81c32b26ccc319af1dfc3633438908f1"
 
 ENTRYPOINT ["venv/bin/python", "/opt/klipperscreen/screen.py", \
               "--configfile", "/mnt/config/klipperscreen.cfg", \
