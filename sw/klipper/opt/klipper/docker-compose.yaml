@@ -2,6 +2,7 @@ services:
 
   klipper:
     build: klipper
+    restart: always
     # TODO: run as non-root
     group_add:
       - dialout
@@ -16,6 +17,7 @@ services:
 
   moonraker:
     build: moonraker
+    restart: always
     # TODO: run as non-root
     volumes:
       - /var/run/klipper/moonraker:/mnt/run
