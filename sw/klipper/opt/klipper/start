@@ -4,6 +4,24 @@ app=$(basename "$0")
 app_dir=$(dirname "$(readlink -e "$0")")
 cd "$app_dir"
 
+# generate HTTPS certs for server
+(
+  cert_dir="$app_dir/nginx/certs"
+  mkdir -p  "$cert_dir"
+  chmod 700 "$cert_dir"
+
+  dh="$cert_dir/dhparam.pem"
+  if ! [ -f "$dh" ]
+  then
+    echo "$app: Diffie-Hellman parameter file is not there - generating (be patiend - this can take time)"
+    rm -f "$dh.tmp"
+    openssl dhparam -out "$dh.tmp" 4096
+    mv "$dh.tmp" "$dh"
+  fi
+
+  # TODO: generate server cert and key (self-signed)
+)
+
 # configure API key, if it's not there yet
 (
   set +x # just in case
