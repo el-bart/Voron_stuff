@@ -11,7 +11,7 @@ services:
       - /dev/serial/by-id:/dev/serial/by-id:ro
       - /var/run/klipper/klipper:/mnt/run
       - ./klipper/data/config:/mnt/config
-      - ./klipper/data/gcode:/mnt/gcodes:ro
+      - ./klipper/data/gcode:/mnt/data/gcodes:ro
       - ./klipper/data/logs:/mnt/logs
 
   moonraker:
@@ -24,6 +24,7 @@ services:
       - ./moonraker/data/config:/mnt/config
       - ./moonraker/data/logs:/mnt/logs
       - ./moonraker/data/data:/mnt/data
+      - ./klipper/data/config:/opt/klipper/config:ro # does not seem to to configurable in moonraker
     depends_on:
       - klipper
 
@@ -31,6 +32,7 @@ services:
     build: klipperscreen
     # TODO: run as non-root
     network_mode: host
+    restart: always
     environment:
       - DISPLAY
       - QT_X11_NO_MITSHM=1
