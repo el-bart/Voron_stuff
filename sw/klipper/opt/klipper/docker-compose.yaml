@@ -12,7 +12,7 @@ services:
       - /dev/serial/by-id:/dev/serial/by-id:ro
       - /var/run/klipper/klipper:/mnt/run
       - ./klipper/data/config:/mnt/config
-      - ./klipper/data/gcode:/mnt/data/gcodes:ro
+      - ./klipper/data/gcode:/mnt/data/gcodes:ro # TODO: R/W?
       - ./klipper/data/logs:/mnt/logs
 
   moonraker:
