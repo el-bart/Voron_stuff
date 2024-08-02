@@ -64,6 +64,10 @@ cd "$app_dir"
   fi
 )
 
+# make sure link to USB serial console to RT board is never gone (udev will not remove it, if there's anything else in there)
+mkdir -p "/dev/serial/by-id"
+touch "/dev/serial/by-id/.placeholder"
+
 # TODO: temporary workaround
 if [ -z "${DISPLAY:-}" ]
 then
