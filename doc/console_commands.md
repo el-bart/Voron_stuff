@@ -3,6 +3,7 @@
 ## misc
 `FIRMWARE_RESTART` - restart RT board (BTT Octopus)
 `RESTART` - restart `klipper`
+`M114` - return current XYZE positions
 
 ## move steppers around
 `STEPPER_BUZZ STEPPER=stepper_x`
@@ -13,9 +14,10 @@
 `STEPPER_BUZZ STEPPER=stepper_z3`
 `STEPPER_BUZZ STEPPER=extruder`
 
-## kliper status
-`STATUS`
-`QUERY_ENDSTOPS`
+## status
+`STATUS` - `klipper` status (connected/disconnected)
+`QUERY_ENDSTOPS` - XYZ
+`QUERY_PROBE` - bed leveling probe
 
 ## heaters
 `TURN_OFF_HEATERS`
