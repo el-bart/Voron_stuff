@@ -15,6 +15,12 @@
 
 ## kliper status
 `STATUS`
+`QUERY_ENDSTOPS`
 
 ## heaters
 `TURN_OFF_HEATERS`
+
+### calibration
+`PID_CALIBRATE HEATER=extruder TARGET=200`
+`PID_CALIBRATE HEATER=heater_bed TARGET=80`
+`SAVE_CONFIG` to save new PID settings
