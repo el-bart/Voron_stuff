@@ -1,8 +1,8 @@
 # commands to run from printer console
 
 ## misc
-`RESTART` - restart `klipper`
 `FIRMWARE_RESTART` - restart RT board (BTT Octopus)
+`RESTART` - restart `klipper`
 
 ## move steppers around
 `STEPPER_BUZZ STEPPER=stepper_x`
