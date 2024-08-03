@@ -31,3 +31,4 @@
 `PROBE` - check the Z height when probe hits the bed
 `PROBE_CALIBRATE` - calibration of offset between bed probe (klicky probe test) and nozzle (manual "paper test")
 `SAVE_CONFIG` - write config to disk (klipper)
+`PROBE_ACCURACY` - make sure min/max are no more than 0.005mm apart
