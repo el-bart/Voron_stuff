@@ -19,10 +19,13 @@
 `QUERY_ENDSTOPS` - XYZ
 `QUERY_PROBE` - bed leveling probe
 
-## heaters
-`TURN_OFF_HEATERS`
+## calibration
 
-### calibration
+### heaters
+`TURN_OFF_HEATERS`
 `PID_CALIBRATE HEATER=extruder TARGET=200`
 `PID_CALIBRATE HEATER=heater_bed TARGET=80`
 `SAVE_CONFIG` to save new PID settings
+
+### probe
+`PROBE` - check the Z height when probe hits the bed
