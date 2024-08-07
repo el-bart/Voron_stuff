@@ -13,6 +13,7 @@
 `STEPPER_BUZZ STEPPER=stepper_z2`
 `STEPPER_BUZZ STEPPER=stepper_z3`
 `STEPPER_BUZZ STEPPER=extruder`
+`G0 X175 Y175 Z150 F9000` - go to 350x350mm bed's center, 15cm above bed, at higher speed
 
 ## status
 `STATUS` - `klipper` status (connected/disconnected)
@@ -24,6 +25,7 @@
 ### heaters
 [voron docs](https://docs.vorondesign.com/build/startup/#pid-tune-bed--hotend).
 `TURN_OFF_HEATERS`
+`M106 S64` - set PCF to 25%
 `PID_CALIBRATE HEATER=extruder TARGET=250`
 `PID_CALIBRATE HEATER=heater_bed TARGET=100`
 `SAVE_CONFIG` to save new PID settings
