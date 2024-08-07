@@ -22,9 +22,10 @@
 ## calibration
 
 ### heaters
+[voron docs](https://docs.vorondesign.com/build/startup/#pid-tune-bed--hotend).
 `TURN_OFF_HEATERS`
-`PID_CALIBRATE HEATER=extruder TARGET=200`
-`PID_CALIBRATE HEATER=heater_bed TARGET=80`
+`PID_CALIBRATE HEATER=extruder TARGET=250`
+`PID_CALIBRATE HEATER=heater_bed TARGET=100`
 `SAVE_CONFIG` to save new PID settings
 
 ### probe
