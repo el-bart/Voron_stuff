@@ -68,6 +68,9 @@ cd "$app_dir"
 mkdir -p "/dev/serial/by-id"
 touch "/dev/serial/by-id/.placeholder"
 
+# placeholder is needed for git, but should not be shown on the jobs list. ;)
+rm -f /opt/klipper/klipper/data/gcode/.placaholder
+
 # TODO: temporary workaround
 if [ -z "${DISPLAY:-}" ]
 then
