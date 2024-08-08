@@ -27,6 +27,7 @@ services:
       - ./moonraker/data/config:/mnt/config
       - ./moonraker/data/logs:/mnt/logs
       - ./moonraker/data/data:/mnt/data
+      - ./klipper/data/gcode:/mnt/data/gcodes
       - ./klipper/data/config:/opt/klipper/config:ro # does not seem to to configurable in moonraker
     depends_on:
       - klipper
