@@ -66,7 +66,7 @@ module mount(mocks=false)
       }
       sx = 24.7;
       sy = 12.4;
-      translate([-sx/2 + wall + base_l/2, 4.3, -eps])
+      translate([-sx/2 + wall + base_l/2, 5.3, -eps])
       {
         hole();
         translate([0, sy, 0])
