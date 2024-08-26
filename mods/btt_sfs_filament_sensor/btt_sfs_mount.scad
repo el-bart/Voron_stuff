@@ -1,4 +1,5 @@
 use <m3d/fn.scad>
+include <m3d/math.scad>
 
 cut_d = 6;
 cut_h = 6.25;
@@ -61,11 +62,11 @@ module mount(mocks=false)
     {
       module hole()
       {
-        cylinder(d=screw_d + 0.5, h=2*wall, $fn=fn(50));
+        cylinder(d=screw_d + 0.5, h=wall+2*eps, $fn=fn(50));
       }
       sx = 24.7;
       sy = 12.4;
-      translate([-sx/2 + wall + base_l/2, 4.3, 0])
+      translate([-sx/2 + wall + base_l/2, 4.3, -eps])
       {
         hole();
         translate([0, sy, 0])
