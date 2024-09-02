@@ -6,16 +6,38 @@ services:
     # TODO: run as non-root
     group_add:
       - dialout
+      - tty
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
     volumes:
       - /dev/serial/by-id:/dev/serial/by-id:ro
       - /var/run/klipper/klipper:/mnt/run
+      - /dev/pts/:/dev/pts/ # needed for link /mnt/run/klipper_host_mcu
       - ./klipper/data/config:/mnt/config
       - ./klipper/data/gcode:/mnt/data/gcodes:ro # TODO: R/W?
       - ./klipper/data/logs:/mnt/logs
     networks:
       - internal
+    depends_on:
+      - klipper_mcu
+
+  klipper_mcu:
+    build: klipper_mcu
+    restart: always
+    # TODO: run as non-root
+    group_add:
+      - 995 # TODO: spi
+      - tty
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/spidev0.0:/dev/spidev0.0
+      - /dev/spidev0.1:/dev/spidev0.1
+    volumes:
+      - /var/run/klipper/klipper:/mnt/run # link to /dev/pts/<sth> will be here
+      - /dev/pts/:/dev/pts/
+    cap_add:
+      - SYS_NICE # needed for RT scheduling
+    networks: []
 
   moonraker:
     build: moonraker
