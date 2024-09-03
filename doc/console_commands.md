@@ -42,6 +42,8 @@ on CoreXY makes sense only on Z axis.
 * `SAVE_CONFIG` - write config to disk (klipper)
 
 ### input shaping
+[klipper - measuring resonances](https://www.klipper3d.org/Measuring_Resonances.html).
+[klipper - resonance compenstation](https://www.klipper3d.org/Resonance_Compensation.html).
 * turn on SPI with `raspi-config`
 * `ACCELEROMETER_QUERY` - check if accelerometer is responding
 * `TEST_RESONANCES AXIS=X` or `TEST_RESONANCES AXIS=Y` - test resonances of a particular axis
