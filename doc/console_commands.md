@@ -44,6 +44,8 @@ on CoreXY makes sense only on Z axis.
 ### input shaping
 [klipper - measuring resonances](https://www.klipper3d.org/Measuring_Resonances.html).
 [klipper - resonance compenstation](https://www.klipper3d.org/Resonance_Compensation.html).
+[LDO ADXL345 input shaper toolkit](https://docs.ldomotors.com/adxl_tool).
+![input shaper connection](input_shaper_connection.jpg)
 * turn on SPI with `raspi-config`
 * `ACCELEROMETER_QUERY` - check if accelerometer is responding
 * `TEST_RESONANCES AXIS=X` or `TEST_RESONANCES AXIS=Y` - test resonances of a particular axis
