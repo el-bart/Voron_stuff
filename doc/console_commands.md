@@ -36,8 +36,14 @@
 `SAVE_CONFIG` - write config to disk (klipper)
 `PROBE_ACCURACY` - make sure min/max are no more than 0.005mm apart
 
-
 ### Z motors
 `ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z` - [endstop phase calibration](https://www.klipper3d.org/Endstop_Phase.html).
 on CoreXY makes sense only on Z axis.
 `SAVE_CONFIG` - write config to disk (klipper)
+
+### input shaping
+* turn on SPI with `raspi-config`
+* `ACCELEROMETER_QUERY` - check if accelerometer is responding
+* `TEST_RESONANCES AXIS=X` or `TEST_RESONANCES AXIS=Y` - test resonances of a particular axis
+* `SHAPER_CALIBRATE` - actual calibration test
+* `SAVE_CONFIG` - save input shaping results
