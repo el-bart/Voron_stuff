@@ -2,6 +2,7 @@
 
 ## sensors
 * chamber thermistor: semitec 103NT-4
+* accelerometer (external): ADXL345 (over SPI)
 
 ## power
 * main fuse: 8A, slow blow (1.2mm panel)
