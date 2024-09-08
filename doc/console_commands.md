@@ -4,6 +4,7 @@
 * `FIRMWARE_RESTART` - restart RT board (BTT Octopus)
 * `RESTART` - restart `klipper`
 * `M114` - return current XYZE positions
+* `G28` - home all axis
 * `G90` - absolute positioning mode
 
 ## move steppers around
