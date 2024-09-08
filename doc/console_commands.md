@@ -4,6 +4,7 @@
 * `FIRMWARE_RESTART` - restart RT board (BTT Octopus)
 * `RESTART` - restart `klipper`
 * `M114` - return current XYZE positions
+* `G90` - absolute positioning mode
 
 ## move steppers around
 * `STEPPER_BUZZ STEPPER=stepper_x`
@@ -35,6 +36,7 @@
 * `PROBE_CALIBRATE` - calibration of offset between bed probe (klicky probe test) and nozzle (manual "paper test")
 * `SAVE_CONFIG` - write config to disk (klipper)
 * `PROBE_ACCURACY` - make sure min/max are no more than 0.005mm apart
+* `CALIBRATE_Z` - calibrate z offset towards the bed (should be ran before each print)
 
 ### Z motors
 * `ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z` - [endstop phase calibration](https://www.klipper3d.org/Endstop_Phase.html).
