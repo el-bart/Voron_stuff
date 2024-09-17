@@ -54,3 +54,9 @@ on CoreXY makes sense only on Z axis.
 * `TEST_RESONANCES AXIS=X` or `TEST_RESONANCES AXIS=Y` - test resonances of a particular axis
 * `SHAPER_CALIBRATE` - actual calibration test
 * `SAVE_CONFIG` - save input shaping results
+
+### bed mesh
+* `BED_MESH_CALIBRATE`
+* `BED_MESH_PROFILE SAVE=<name>`
+* `BED_MESH_PROFILE LOAD=<name>`
+* `BED_MESH_PROFILE REMOVE=<name>`
