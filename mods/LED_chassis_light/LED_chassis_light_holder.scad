@@ -6,7 +6,7 @@ cut_h = 6.25;
 
 led_w = 8.2;
 led_l = 2.85;
-led_angle = 25; // [deg]
+led_angle = 35; // [deg]
 
 wall = 2;
 l = 350;
