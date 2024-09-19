@@ -7,7 +7,11 @@ wall = 2;
 l = 50;
 base_l = 53.1;
 screw_d = 3;
+spacing = 1.2;
 
+holes = 3;
+hole_d = 3 + 0.5;
+hole_side_clearance = 10;
 
 module alu_profile_20x20(l)
 {
@@ -23,7 +27,7 @@ module alu_profile_20x20(l)
     }
   }
 
-  translate([0, 0, -(20-cut_d)/2])
+  translate([0, 0, -spacing])
     translate(20/2*[-1, 0, 1])
       rotate([-90, 0, 0])
         linear_extrude(l)
@@ -52,6 +56,41 @@ module led_strip(l)
 
 module mount(mocks=false)
 {
+  module mount_wall(holes)
+  {
+    assert(holes >= 2);
+
+    ml = 20 - 2*spacing;
+    groove_w = cut_d - 0.5;
+
+    module crossection()
+    {
+      square([ml, wall]); // top mount
+      translate([-groove_w/2 + 20/2 - spacing, -2])
+        square([groove_w, 2]); // groove fill
+    }
+
+    module all_holes()
+    {
+      inter_hole = (l - 2*hole_d/2 - 2*hole_side_clearance) / (holes-1);
+      for(dy=[0:holes-1])
+        translate([0, hole_side_clearance + dy*inter_hole, 0])
+          translate([0, hole_d/2, 20/2-spacing])
+            translate([+wall+eps, 0, 0])
+              rotate([0, -90, 0])
+                cylinder(d=hole_d, h=cut_h+2*eps, $fn=fn(50));
+    }
+
+    difference()
+    {
+      rotate([-90, -90, 0])
+        linear_extrude(l)
+          crossection();
+      all_holes();
+    }
+  }
+
+  mount_wall(holes=holes);
   %if(mocks)
   {
     alu_profile_20x20(l=l);
