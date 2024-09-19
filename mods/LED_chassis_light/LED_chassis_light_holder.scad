@@ -3,14 +3,18 @@ include <m3d/math.scad>
 
 cut_d = 6;
 cut_h = 6.25;
+
+led_w = 8.2;
+led_l = 2.85;
+led_angle = 25; // [deg]
+
 wall = 2;
 l = 50;
-base_l = 53.1;
-screw_d = 3;
 spacing = 1.2;
 
+screw_d = 3;
 holes = 3;
-hole_d = 3 + 0.5;
+hole_d = screw_d + 0.5;
 hole_side_clearance = 10;
 
 module alu_profile_20x20(l)
@@ -37,17 +41,16 @@ module alu_profile_20x20(l)
 
 module led_strip(l)
 {
-  w = 8.2;
+  w = 3.2;
   h = 0.5;
-  led_w = 3.2;
-  led_l = 2.85;
+
   module led()
   {
-    translate([(w-led_w)/2, 0, 0])
-      cube([led_w, led_l, 1.25]);
+    translate([(led_w-w)/2, 0, 0])
+      cube([w, led_l, 1.25]);
   }
 
-  cube([w, l, h]);
+  cube([led_w, l, h]);
   for(dy = [5 : 8.5 : l-led_l])
     translate([0, dy, 0])
       led();
@@ -56,7 +59,7 @@ module led_strip(l)
 
 module mount(mocks=false)
 {
-  module mount_wall(holes)
+  module mount_wall()
   {
     assert(holes >= 2);
 
@@ -90,14 +93,33 @@ module mount(mocks=false)
     }
   }
 
-  mount_wall(holes=holes);
-  %if(mocks)
+  module led_support(mocks)
   {
-    alu_profile_20x20(l=l);
-    led_strip(l=l);
+    w = led_w + 2*1;
+    h = w * sin(led_angle);
+    x = w * cos(led_angle);
+    translate([wall, l, 0])
+      rotate([90, 0, 0])
+        linear_extrude(l)
+          polygon([
+            [0, 0],
+            [0, h],
+            [x, 0]
+          ]);
+
+    %if(mocks)
+      translate([wall, 0, h])
+        rotate([0, led_angle, 0])
+          led_strip(l=l);
   }
+
+
+  mount_wall();
+  led_support(mocks);
+
+  %if(mocks)
+    alu_profile_20x20(l=l);
 }
 
 
-//rotate([90, 0, 0])
-  mount(mocks=true);
+mount(mocks=true);
