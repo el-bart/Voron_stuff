@@ -105,6 +105,7 @@ module mount(mocks=false)
     w = led_w + 2*1;
     h = w * sin(led_angle);
     x = w * cos(led_angle);
+
     translate([wall, l, 0])
       rotate([90, 0, 0])
         linear_extrude(l)
@@ -113,6 +114,10 @@ module mount(mocks=false)
             [0, h],
             [x, 0]
           ]);
+    // extra flat part on the bottom, to avoid sharp and weak edges
+    extra_bottom = 2 * 0.2;
+    translate([0, 0, -extra_bottom])
+      cube([wall+x, l, extra_bottom]);
 
     %if(mocks)
       translate([wall, 0, h])
