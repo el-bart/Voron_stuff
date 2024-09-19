@@ -9,7 +9,7 @@ led_l = 2.85;
 led_angle = 25; // [deg]
 
 wall = 2;
-l = 50;
+l = 350;
 spacing = 1.2;
 
 screw_d = 3;
@@ -65,12 +65,19 @@ module mount(mocks=false)
 
     ml = 20 - 2*spacing;
     groove_w = cut_d - 0.5;
+    depth = 2;
 
     module crossection()
     {
       square([ml, wall]); // top mount
-      translate([-groove_w/2 + 20/2 - spacing, -2])
-        square([groove_w, 2]); // groove fill
+      // chamfered froove fill
+      translate([-groove_w/2 + 20/2 - spacing, -depth])
+        polygon([
+          [sin(45)*depth, 0],
+          [0, depth],
+          [groove_w, depth],
+          [groove_w, 0],
+        ]);
     }
 
     module all_holes()
@@ -122,4 +129,5 @@ module mount(mocks=false)
 }
 
 
-mount(mocks=true);
+rotate([0, 0, -45]) // 350mm print on 350mm? sure - diagonal!
+  mount(mocks=true);
