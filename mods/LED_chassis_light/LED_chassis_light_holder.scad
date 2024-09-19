@@ -129,5 +129,5 @@ module mount(mocks=false)
 }
 
 
-rotate([0, 0, -45]) // 350mm print on 350mm? sure - diagonal!
+rotate([0, 0, 45]) // 350mm print on 350mm? sure - diagonal!
   mount(mocks=true);
