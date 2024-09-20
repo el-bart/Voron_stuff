@@ -57,7 +57,7 @@ module led_strip(l)
 }
 
 
-module mount(mocks=false)
+module mount(mocks=false, support_disks=false)
 {
   module mount_wall()
   {
@@ -129,10 +129,17 @@ module mount(mocks=false)
   mount_wall();
   led_support(mocks);
 
+  // disks are there to minimize piling off from bed.
+  // they are to be removed after the print is finished
+  if(support_disks)
+    for(dy=[0, l])
+      translate([led_w/2, dy, -2*0.2])
+        cylinder(d=3*led_w, h=2*0.2);
+
   %if(mocks)
     alu_profile_20x20(l=l);
 }
 
 
 rotate([0, 0, 45]) // 350mm print on 350mm? sure - diagonal!
-  mount(mocks=true);
+  mount(mocks=true, support_disks=true);
