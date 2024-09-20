@@ -37,7 +37,10 @@
 * `PROBE_CALIBRATE` - calibration of offset between bed probe (klicky probe test) and nozzle (manual "paper test")
 * `SAVE_CONFIG` - write config to disk (klipper)
 * `PROBE_ACCURACY` - make sure min/max are no more than 0.005mm apart
+
+#### auto z
 * `CALIBRATE_Z` - calibrate z offset towards the bed (should be ran before each print)
+* `CALCULATE_SWITCH_OFFSET` - find good height with a piece of paper and run this to calculate the value
 
 ### Z motors
 * `ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z` - [endstop phase calibration](https://www.klipper3d.org/Endstop_Phase.html).
