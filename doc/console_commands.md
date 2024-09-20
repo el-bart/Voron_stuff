@@ -25,7 +25,7 @@
 ## calibration
 
 ### heaters
-[voron docs](https://docs.vorondesign.com/build/startup/#pid-tune-bed--hotend).
+* [voron docs](https://docs.vorondesign.com/build/startup/#pid-tune-bed--hotend).
 * `TURN_OFF_HEATERS`
 * `M106 S64` - set PCF to 25%
 * `PID_CALIBRATE HEATER=extruder TARGET=250`
@@ -39,6 +39,10 @@
 * `PROBE_ACCURACY` - make sure min/max are no more than 0.005mm apart
 
 #### auto z
+* calibration process:
+  * [principle of operation](https://github.com/protoloft/klipper_z_calibration/wiki/What-It-Does)
+  * [configuration process](https://github.com/protoloft/klipper_z_calibration/wiki/How-To-Configure-It)
+  * [video intro](https://www.youtube.com/watch?v=oQYHFecsTto)
 * `CALIBRATE_Z` - calibrate z offset towards the bed (should be ran before each print)
 * `CALCULATE_SWITCH_OFFSET` - find good height with a piece of paper and run this to calculate the value
 
@@ -48,10 +52,11 @@ on CoreXY makes sense only on Z axis.
 * `SAVE_CONFIG` - write config to disk (klipper)
 
 ### input shaping
-[klipper - measuring resonances](https://www.klipper3d.org/Measuring_Resonances.html).
-[klipper - resonance compenstation](https://www.klipper3d.org/Resonance_Compensation.html).
-[LDO ADXL345 input shaper toolkit](https://docs.ldomotors.com/adxl_tool).
 ![input shaper connection](input_shaper_connection.jpg)
+* docs:
+  * [klipper - measuring resonances](https://www.klipper3d.org/Measuring_Resonances.html).
+  * [klipper - resonance compenstation](https://www.klipper3d.org/Resonance_Compensation.html).
+  * [LDO ADXL345 input shaper toolkit](https://docs.ldomotors.com/adxl_tool).
 * turn on SPI with `raspi-config`
 * `ACCELEROMETER_QUERY` - check if accelerometer is responding
 * `TEST_RESONANCES AXIS=X` or `TEST_RESONANCES AXIS=Y` - test resonances of a particular axis
