@@ -1,3 +1,4 @@
+use <m3d/fn.scad>
 include <m3d/math.scad>
 
 module cover(l)
@@ -27,7 +28,7 @@ module cover(l)
         minkowski()
         {
           crossection_thin();
-          square([th,th], center=true);
+          circle(d=th, $fn=fn(20));
         }
   }
 
