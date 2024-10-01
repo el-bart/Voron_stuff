@@ -11,7 +11,7 @@ module cover(l)
       square([7.16, eps]);
     // side walls
     for(dir=[-1,+1])
-      translate([dir*-6/2, 0])
+      translate([dir*-5/2, 0])
         rotate([0, 0, dir*10])
         {
           // lower arm
