@@ -14,8 +14,10 @@ module cover(l)
       translate([dir*-6/2, 0])
         rotate([0, 0, dir*10])
         {
-          square([eps, 2.36]);
-          translate([0, 2.36])
+          // lower arm
+          square([eps, 2.36-th]);
+          // upper arm
+          translate([0, 2.36-th])
             rotate([0, 0, dir*-40])
               square([eps, 0.66]);
         }
