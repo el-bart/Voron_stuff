@@ -43,6 +43,10 @@ services:
     build: moonraker
     restart: always
     # TODO: run as non-root
+    group_add:
+      - video
+    devices:
+      - /dev/video0:/dev/video0
     volumes:
       - /var/run/klipper/moonraker:/mnt/run
       - /var/run/klipper/klipper:/mnt/klipper/run/
