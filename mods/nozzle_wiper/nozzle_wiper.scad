@@ -6,6 +6,9 @@ cut_d = 6;
 cut_h = 6.25;
 sponge_size = [70, 20, 115];
 alu_to_edge_ox = 95;
+wall = 1.2;
+box_size_ext = [alu_to_edge_ox+10, sponge_size.y+30, 20];
+
 
 module alu_profile_20x20(l)
 {
@@ -31,13 +34,14 @@ module alu_profile_20x20(l)
 module silicon_sponge_mock(h_cut)
 {
   s = [sponge_size.x, sponge_size.z, sponge_size.y];
-  intersection()
-  {
-    translate([0, 0, h_cut])
-      rotate([-90, 0, 0])
-        side_rounded_cube(s, 10);
-    cube(sponge_size);
-  }
+  translate(wall*[1,1,1])
+    intersection()
+    {
+      translate([0, 0, h_cut])
+        rotate([-90, 0, 0])
+          side_rounded_cube(s, 10);
+      cube(sponge_size);
+    }
 }
 
 
@@ -65,6 +69,52 @@ module max_nozzle_pos()
 
 module nozzle_wiper(mocks)
 {
+  module mount_groove()
+  {
+    groove_w = cut_d - 0.2;
+    depth = 2.2;
+    module crossection()
+    {
+      translate([-groove_w/2 + 20/2, -depth])
+        polygon([
+          [sin(45)*depth, 0],
+          [0, depth],
+          [groove_w, depth],
+          [groove_w, 0],
+        ]);
+    }
+
+    rotate([-90, -90, 0])
+      linear_extrude(box_size_ext.y)
+        crossection();
+  }
+
+  module filament_sledge()
+  {
+    x = sponge_size.y;
+    translate(wall*[1,1,1] + [sponge_size.x, 0, 0])
+      rotate([90, 0, 90])
+        linear_extrude(box_size_ext.x - sponge_size.x - 2*wall)
+          polygon([
+            [0, 0],
+            [x, 0],
+            [0, x-wall]
+          ]);
+  }
+
+  module main()
+  {
+    difference()
+    {
+      cube(box_size_ext);
+      translate(wall*[1,1,1])
+        cube(box_size_ext - wall*[2,2,eps]);
+    }
+    mount_groove();
+    filament_sledge();
+  }
+
+  main();
   %if(mocks)
   {
     translate([0, -100, 0])
