@@ -9,7 +9,7 @@ alu_to_edge_ox = 95;
 wall = 1.2;
 box_size_ext = [alu_to_edge_ox+10, sponge_size.y+30, 20];
 support_wall = 2.5;
-support_wall_angle = 10;
+support_wall_dx = 5; // how deep the wall drives into the sponge
 
 
 module alu_profile_20x20(l)
@@ -112,8 +112,7 @@ module nozzle_wiper(mocks)
   {
     h = box_size_ext.z - wall;
     w = support_wall;
-    a = support_wall_angle;
-    dx = h * tan(a);
+    dx = support_wall_dx;
     l = sponge_size.x + 1;
     translate(wall*[1,1,1] + [0, sponge_size.y, 0])
       translate([l, w, 0])
