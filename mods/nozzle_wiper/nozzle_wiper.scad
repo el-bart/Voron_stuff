@@ -8,6 +8,8 @@ sponge_size = [70, 20, 115];
 alu_to_edge_ox = 95;
 wall = 1.2;
 box_size_ext = [alu_to_edge_ox+10, sponge_size.y+30, 20];
+support_wall = 2.5;
+support_wall_angle = 10;
 
 
 module alu_profile_20x20(l)
@@ -102,19 +104,50 @@ module nozzle_wiper(mocks)
           ]);
   }
 
-  module main()
+  module sponge_holnder_wall()
+  {
+    h = box_size_ext.z - wall;
+    w = support_wall;
+    a = support_wall_angle;
+    dx = h * tan(a);
+    l = sponge_size.x;
+    translate(wall*[1,1,1] + [0, sponge_size.y, 0])
+      translate([l, w, 0])
+        rotate([90, 0, 180])
+          rotate([0, 90, 0])
+            linear_extrude(l)
+              polygon([
+                [0, 0],
+                [0, h],
+                [dx+w, h],
+                [w, 0]
+              ]);
+  }
+
+  module box()
   {
     difference()
     {
       cube(box_size_ext);
+      // cut
       translate(wall*[1,1,1])
         cube(box_size_ext - wall*[2,2,eps]);
     }
     mount_groove();
     filament_sledge();
+    sponge_holnder_wall();
   }
 
-  main();
+  difference()
+  {
+    box();
+    // M3 screw hole
+    dy_free_center = sponge_size.y + (box_size_ext.y - sponge_size.y - 2*wall)/2;
+    translate([wall+eps, dy_free_center, 20/2])
+      rotate([0, -90, 0])
+        cylinder(d=3.5, h=wall+cut_h+eps, $fn=fn(30));
+  }
+
   %if(mocks)
   {
     translate([0, -100, 0])
