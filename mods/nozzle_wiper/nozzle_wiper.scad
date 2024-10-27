@@ -26,32 +26,35 @@ module alu_profile_20x20(l)
     }
   }
 
-  translate(20/2*[-1, 0, 1])
-    rotate([-90, 0, 0])
-      linear_extrude(l)
-        crossection();
+  color("SlateGray")
+    translate(20/2*[-1, 0, 1])
+      rotate([-90, 0, 0])
+        linear_extrude(l)
+          crossection();
 }
 
 
 module silicon_sponge_mock(h_cut)
 {
   s = [sponge_size.x, sponge_size.z, sponge_size.y];
-  translate(wall*[1,1,1])
-    intersection()
-    {
-      translate([0, 0, h_cut])
-        rotate([-90, 0, 0])
-          side_rounded_cube(s, 10);
-      cube(sponge_size);
-    }
+  color("DeepPink")
+    translate(wall*[1,1,1])
+      intersection()
+      {
+        translate([0, 0, h_cut])
+          rotate([-90, 0, 0])
+            side_rounded_cube(s, 10);
+        cube(sponge_size);
+      }
 }
 
 
 module bed_mock()
 {
   s = [350, 350, 14];
-  translate([-s.x+alu_to_edge_ox, -s.y, 21.75-s.z + 20])
-    cube(s);
+  color("SaddleBrown")
+    translate([-s.x+alu_to_edge_ox, -s.y, 21.75-s.z + 20])
+      cube(s);
 }
 
 
@@ -59,13 +62,14 @@ module max_nozzle_pos()
 {
   wall = 0.5;
   s = [110, 10, 10];
-  translate([-s.x + alu_to_edge_ox, 0, 42])
-    difference()
-    {
-      cube(s);
-      translate([-wall, -wall, -eps])
-        cube(s + [0,0,2*eps]);
-    }
+  color("DeepSkyBlue")
+    translate([-s.x + alu_to_edge_ox, 0, 42])
+      difference()
+      {
+        cube(s);
+        translate([-wall, -wall, -eps])
+          cube(s + [0,0,2*eps]);
+      }
 }
 
 
@@ -110,7 +114,7 @@ module nozzle_wiper(mocks)
     w = support_wall;
     a = support_wall_angle;
     dx = h * tan(a);
-    l = sponge_size.x;
+    l = sponge_size.x + 1;
     translate(wall*[1,1,1] + [0, sponge_size.y, 0])
       translate([l, w, 0])
         rotate([90, 0, 180])
