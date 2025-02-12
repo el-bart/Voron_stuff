@@ -1,4 +1,8 @@
 #!/bin/bash
+# helper script that jobs print head around corners of the printer.
+# always going through center, to ensure all axies are moving all the time.
+# this can be helper e.g. after linear rails lubrication.
+#
 set -eu -o pipefail
 
 if [ $# -ne 2 ]
