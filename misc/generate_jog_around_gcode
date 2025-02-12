@@ -1,0 +1,41 @@
+#!/bin/bash
+set -eu -o pipefail
+
+if [ $# -ne 2 ]
+then
+  echo "$(basename "$0") <N> <speed>" >&2
+  exit 2
+fi
+n=$1
+speed=$2
+shift 2
+
+cat <<EOF
+g90 ; switch to absolute positioning
+g0 x175 y175 z150 f$speed ; center and set the speed
+EOF
+
+for((i=0; i<n; ++i))
+do
+  echo
+  echo "; iteration $((i+1))/$n"
+  for x in 10 340
+  do
+    for y in 10 340
+    do
+      for z in 10 300
+      do
+        cat <<EOF
+g0 x175 y175 z150 ; center
+g0 x$x y$y z$z
+EOF
+      done
+    done
+  done
+done
+
+cat <<EOF
+
+; done
+g0 x175 y175 z150 ; center
+EOF
