@@ -38,19 +38,6 @@
 * `SAVE_CONFIG` - write config to disk (klipper)
 * `PROBE_ACCURACY` - make sure min/max are no more than 0.005mm apart
 
-#### auto z
-* calibration process:
-  * [principle of operation](https://github.com/protoloft/klipper_z_calibration/wiki/What-It-Does)
-  * [configuration process](https://github.com/protoloft/klipper_z_calibration/wiki/How-To-Configure-It)
-  * [video intro](https://www.youtube.com/watch?v=oQYHFecsTto)
-* `CALIBRATE_Z` - calibrate z offset towards the bed (should be ran before each print)
-* `CALCULATE_SWITCH_OFFSET` - find good height with a piece of paper and run this to calculate the value
-
-### Z motors
-* `ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z` - [endstop phase calibration](https://www.klipper3d.org/Endstop_Phase.html).
-on CoreXY makes sense only on Z axis.
-* `SAVE_CONFIG` - write config to disk (klipper)
-
 ### input shaping
 ![input shaper connection](input_shaper_connection.jpg)
 * docs:
