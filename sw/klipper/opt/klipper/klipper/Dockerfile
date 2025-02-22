@@ -40,14 +40,6 @@ RUN python3 -m venv venv && \
     venv/bin/python -m compileall "/opt/klipper/klippy" && \
     venv/bin/python "/opt/klipper/klippy/chelper/__init__.py"
 
-# install plugin for ensuring consistent z-calibration
-RUN git clone \
-          "https://github.com/protoloft/klipper_z_calibration.git" \
-          "/opt/klipper_z_calibration" && \
-    cd "/opt/klipper_z_calibration" && \
-    git checkout --quiet "v1.1.2" && \
-    cp -v /opt/klipper_z_calibration/z_calibration.py /opt/klipper/klippy/extras/
-
 ENTRYPOINT ["python3", "/opt/klipper/klippy/klippy.py", \
               "--input-tty", "/mnt/run/klipper.tty", \
               "--api-server", "/mnt/run/klipper.sock", \
