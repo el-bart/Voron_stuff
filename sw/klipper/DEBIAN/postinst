@@ -14,10 +14,10 @@ fi
 # build images
 (
   cd /opt/klipper
-  echo "pulling docker images"
-  docker-compose pull
-  echo "building docker images"
+  echo "docker: building images"
   docker-compose build
+  echo "docker: pulling images"
+  docker-compose pull
 )
 
 echo "starting services"
