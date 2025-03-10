@@ -11,6 +11,16 @@ then
     < /dev/null
 fi
 
+# build images
+(
+  cd /opt/klipper
+  echo "pulling docker images"
+  docker-compose pull
+  echo "building docker images"
+  docker-compose build
+)
+
+echo "starting services"
 systemctl daemon-reload
 for s in \
   getty@tty1 \
