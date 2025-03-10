@@ -33,7 +33,7 @@ RUN git clone \
           "https://github.com/KlipperScreen/KlipperScreen.git" \
           "/opt/klipperscreen" && \
     cd "/opt/klipperscreen" && \
-    git checkout --quiet "v0.4.3"
+    git checkout --quiet "v0.4.5"
 
 RUN python3 -m venv venv && \
     venv/bin/pip install -r "/opt/klipperscreen/scripts/KlipperScreen-requirements.txt"
