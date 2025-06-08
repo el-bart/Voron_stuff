@@ -89,7 +89,7 @@ services:
       - internal
 
   mjpeg_server:
-    build: mjpeg_serve
+    build: mjpeg_server
     restart: always
     devices:
       - /dev/video0:/dev/video0

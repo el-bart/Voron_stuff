@@ -44,8 +44,8 @@ RUN cd /usr/src/ && \
 #
 RUN apt-get update && apt-get install -y \
     unzip
-ENV MJPEG_SERVER_VER="9e271e7f24c31c123bdf4c5425621ea8e9afcb5c"
-ENV MJPEG_SERVER_SHA="592f28fab55e7f23017324adb1b8339c677a08c1fac368f147f207e611b22f99"
+ENV MJPEG_SERVER_VER="3a3dd9519f23543dbc4d6a65a85ec5f92566e000"
+ENV MJPEG_SERVER_SHA="b8f46e79fafb92eae0b47639aada7fab28b9da9185a3ce4ea2e1c9614317ea41"
 ENV MJPEG_SERVER_URL="https://github.com/el-bart/mjpeg_cam_stream_server/archive/$MJPEG_SERVER_VER.zip"
 RUN cd /usr/src/ && \
     wget "$MJPEG_SERVER_URL" && \
