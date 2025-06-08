@@ -88,7 +88,7 @@ services:
     networks:
       - internal
 
-  mjpeg_server:
+  cornercam:
     build: mjpeg_server
     restart: always
     devices:
@@ -111,7 +111,7 @@ services:
     depends_on:
       - moonraker
       - fluidd
-      #- mjpeg_server # not strictly needed - this is a secondary feature
+      #- cornercam # not strictly needed - this is a secondary feature
     networks:
       - internal
       - external

@@ -22,7 +22,7 @@ cd "$app_dir"
   fi
 
   # generate cert+key pair for both services
-  for host in moonraker fluidd
+  for host in moonraker fluidd cornercam
   do
     key="$cert_dir/$host.key"
     crt="$cert_dir/$host.crt"
