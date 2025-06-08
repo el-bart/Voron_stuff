@@ -44,11 +44,11 @@ RUN cd /usr/src/ && \
 #
 RUN apt-get update && apt-get install -y \
     unzip
-ENV MJPEG_SERVER_VER="3a3dd9519f23543dbc4d6a65a85ec5f92566e000"
-ENV MJPEG_SERVER_SHA="b8f46e79fafb92eae0b47639aada7fab28b9da9185a3ce4ea2e1c9614317ea41"
-ENV MJPEG_SERVER_URL="https://github.com/el-bart/mjpeg_cam_stream_server/archive/$MJPEG_SERVER_VER.zip"
+ENV MJPEG_SERVER_VER="3a3aecac9c6a7f9f5405754af9ea8bd727789465"
+ENV MJPEG_SERVER_SHA="dde3096da26489c5577ea814b1f7f25a7d8f98b2e01c9d94a51993d51330b12c"
 RUN cd /usr/src/ && \
-    wget "$MJPEG_SERVER_URL" && \
+    wget "https://github.com/el-bart/mjpeg_cam_stream_server/archive/$MJPEG_SERVER_VER.zip" && \
+    sha256sum "$MJPEG_SERVER_VER.zip" && \
     [ "$(sha256sum < "$MJPEG_SERVER_VER.zip")" = "$MJPEG_SERVER_SHA  -" ] && \
     unzip "$MJPEG_SERVER_VER.zip" && \
     mv "mjpeg_cam_stream_server-$MJPEG_SERVER_VER" "mjpeg_cam_stream_server" && \
@@ -56,7 +56,7 @@ RUN cd /usr/src/ && \
     mkdir -p build/ && \
     cd build && \
     cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ../src/ && \
-    ninja -j 1 && \
+    ninja -j 2 mjpeg_cam_stream_server && \
     cp -v mjpeg_cam_stream_server /usr/local/bin/
 
 
