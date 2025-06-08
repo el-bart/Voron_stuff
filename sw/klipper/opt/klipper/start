@@ -43,6 +43,17 @@ cd "$app_dir"
   done
 )
 
+# setup required user passwords
+(
+  cornercam_pass="/opt/klipper/nginx/pass/cornercam.htpasswd"
+  if ! [ -f "$cornercam_pass" ]
+  then
+    echo "$app: $cornercam_pass is missing - attempting to create one"
+    touch "$cornercam_pass"
+    echo "$app: to add user interactively use command: htpasswd '$cornercam_pass' user"
+  fi
+)
+
 # configure API key, if it's not there yet
 (
   set +x # just in case

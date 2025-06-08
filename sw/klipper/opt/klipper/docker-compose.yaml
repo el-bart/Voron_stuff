@@ -105,6 +105,7 @@ services:
     volumes:
       - ./nginx/conf:/etc/nginx/conf.d:ro
       - ./nginx/certs:/etc/nginx/certs:ro
+      - ./nginx/pass:/etc/nginx/pass:ro
     ports:
       - 80:80
       - 443:443
