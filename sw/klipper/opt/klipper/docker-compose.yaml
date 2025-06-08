@@ -88,6 +88,16 @@ services:
     networks:
       - internal
 
+  mjpeg_server:
+    build: mjpeg_serve
+    restart: always
+    devices:
+      - /dev/video0:/dev/video0
+    group_add:
+      - video
+    networks:
+      - internal
+
   # only nginx has an access to/trom the outside world - all other containers are cut off
   nginx:
     image: nginx:1.27
@@ -101,6 +111,7 @@ services:
     depends_on:
       - moonraker
       - fluidd
+      #- mjpeg_server # not strictly needed - this is a secondary feature
     networks:
       - internal
       - external
