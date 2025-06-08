@@ -59,7 +59,6 @@ RUN cd /usr/src/ && \
     ninja -j 2 mjpeg_cam_stream_server && \
     cp -v mjpeg_cam_stream_server /usr/local/bin/
 
-
 #
 # runtime
 #
