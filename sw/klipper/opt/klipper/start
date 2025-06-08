@@ -4,6 +4,9 @@ app=$(basename "$0")
 app_dir=$(dirname "$(readlink -e "$0")")
 cd "$app_dir"
 
+# make sure this directory is not world-accessible, as it contains secrets!
+chmod 700 .
+
 # generate HTTPS certs for server
 (
   cert_dir="$app_dir/nginx/certs"
@@ -62,8 +65,9 @@ pass_cfg=/etc/klipper-dc/passwords
   source "$pass_cfg"
   if ! [ -f "$cornercam_pass" ]
   then
-    echo "$app: $cornercam_pass is missing - create one"
-    htpasswd -i "$cornercam_pass" "$CORNERCAM_USER" <<<"$CORNERCAM_PASSWORD"
+    echo "$app: $cornercam_pass is missing - creating one"
+    htpasswd -c -i "$cornercam_pass" "$CORNERCAM_USER" <<<"$CORNERCAM_PASSWORD"
+    chmod 644 "$cornercam_pass" # needed for non-root nginx
   fi
 )
 
