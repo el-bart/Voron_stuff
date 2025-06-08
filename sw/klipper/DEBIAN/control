@@ -15,4 +15,5 @@ Depends: docker.io,
          xserver-xorg-video-fbdev,
          sqlite3,
          apache2-utils,
+         pwgen,
          bash

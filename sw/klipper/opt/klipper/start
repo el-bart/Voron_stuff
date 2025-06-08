@@ -43,14 +43,27 @@ cd "$app_dir"
   done
 )
 
+
+pass_cfg=/etc/klipper-dc/passwords
+# configure service passwords, if these do not exist yet
+(
+  set +x # just in case
+  umask 077
+  mkdir -p "$(dirname "$pass_cfg")"
+  [ -f "$pass_cfg" ] || touch "$pass_cfg"
+  grep -q '^CORNERCAM_USER=' "$pass_cfg" || echo "CORNERCAM_USER=user" >> "$pass_cfg"
+  grep -q '^CORNERCAM_PASSWORD=' "$pass_cfg" || echo "CORNERCAM_PASSWORD=$(pwgen 40 1)" >> "$pass_cfg"
+)
+
 # setup required user passwords
 (
+  set +x # just in case
   cornercam_pass="/opt/klipper/nginx/pass/cornercam.htpasswd"
+  source "$pass_cfg"
   if ! [ -f "$cornercam_pass" ]
   then
-    echo "$app: $cornercam_pass is missing - attempting to create one"
-    touch "$cornercam_pass"
-    echo "$app: to add user interactively use command: htpasswd '$cornercam_pass' user"
+    echo "$app: $cornercam_pass is missing - create one"
+    htpasswd -i "$cornercam_pass" "$CORNERCAM_USER" <<<"$CORNERCAM_PASSWORD"
   fi
 )
 
@@ -58,8 +71,7 @@ cd "$app_dir"
 (
   set +x # just in case
   cfg="/opt/klipper/klipperscreen/data/config/klipperscreen.cfg"
-  placeholder="MOONRAKER_API_KEY_PLACEHOLDER"
-  if grep -q "$placeholder" "$cfg"
+  if grep -q "MOONRAKER_API_KEY_PLACEHOLDER" "$cfg"
   then
     db="/opt/klipper/moonraker/data/data/database/moonraker-sql.db"
     query='SELECT password FROM authorized_users WHERE username="_API_KEY_USER_";'
@@ -71,8 +83,19 @@ cd "$app_dir"
     fi
     echo "$app: substituting moonraker's key placeholder with actual API key"
     key=$(sqlite3 "$db" "$query")
-    sed -i "s#$placeholder#$key#" "$cfg"
+    sed -i "s#MOONRAKER_API_KEY_PLACEHOLDER#$key#" "$cfg"
   fi
+)
+
+# configure password for cornercam, if not yet there
+(
+  set +x # just in case
+  source "$pass_cfg"
+  cfg="/opt/klipper/moonraker/data/config/moonraker.cfg"
+  sed -i \
+    -e "s/CORNERCAM_USER_PLACEHOLDER/$CORNERCAM_USER/" \
+    -e "s/CORNERCAM_PASSWORD_PLACEHOLDER/$CORNERCAM_PASSWORD/" \
+    "$cfg"
 )
 
 # make sure link to USB serial console to RT board is never gone (udev will not remove it, if there's anything else in there)
