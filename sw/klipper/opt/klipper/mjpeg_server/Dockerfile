@@ -44,14 +44,14 @@ RUN cd /usr/src/ && \
 #
 RUN apt-get update && apt-get install -y \
     unzip
-ENV MJPEG_SERVER_VER="3a3aecac9c6a7f9f5405754af9ea8bd727789465"
-ENV MJPEG_SERVER_SHA="dde3096da26489c5577ea814b1f7f25a7d8f98b2e01c9d94a51993d51330b12c"
+ENV MJPEG_SERVER_VER="v1.0.0"
+ENV MJPEG_SERVER_SHA="ad9eff8a24bee5e3a29b732f7ceb9de07604c48397d2616f0bc7dc3bbb080521"
 RUN cd /usr/src/ && \
-    wget "https://github.com/el-bart/mjpeg_cam_stream_server/archive/$MJPEG_SERVER_VER.zip" && \
+    wget -O "$MJPEG_SERVER_VER.zip" "https://github.com/el-bart/mjpeg_cam_stream_server/archive/refs/tags/$MJPEG_SERVER_VER.zip" && \
     sha256sum "$MJPEG_SERVER_VER.zip" && \
     [ "$(sha256sum < "$MJPEG_SERVER_VER.zip")" = "$MJPEG_SERVER_SHA  -" ] && \
     unzip "$MJPEG_SERVER_VER.zip" && \
-    mv "mjpeg_cam_stream_server-$MJPEG_SERVER_VER" "mjpeg_cam_stream_server" && \
+    mv mjpeg_cam_stream_server-* "mjpeg_cam_stream_server" && \
     cd "mjpeg_cam_stream_server" && \
     mkdir -p build/ && \
     cd build && \
