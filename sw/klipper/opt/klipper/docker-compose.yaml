@@ -43,7 +43,8 @@ services:
 
   moonraker:
     build: moonraker
-    read_only: true
+    # TODO: cannot be read-onyl as is, since it does write to /tmp, etc...
+    #read_only: true
     restart: always
     # TODO: run as non-root
     group_add:
