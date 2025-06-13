@@ -38,10 +38,9 @@ RUN cd /usr/src/ && \
 ENV MJPEG_SERVER_VER="v1.1.0"
 ENV MJPEG_SERVER_SHA="5f20be99651290291aac89e824484e873084eb5d5ae35af218f1619f133bb488"
 RUN cd /usr/src/ && \
-    wget -O "$MJPEG_SERVER_VER.zip" "https://github.com/el-bart/mjpeg_cam_stream_server/archive/refs/tags/$MJPEG_SERVER_VER.tar.gz" && \
-    sha256sum "$MJPEG_SERVER_VER.zip" && \
-    [ "$(sha256sum < "$MJPEG_SERVER_VER.zip")" = "$MJPEG_SERVER_SHA  -" ] && \
-    unzip "$MJPEG_SERVER_VER.zip" && \
+    wget -O "$MJPEG_SERVER_VER.tar.gz" "https://github.com/el-bart/mjpeg_cam_stream_server/archive/refs/tags/$MJPEG_SERVER_VER.tar.gz" && \
+    [ "$(sha256sum < "$MJPEG_SERVER_VER.tar.gz")" = "$MJPEG_SERVER_SHA  -" ] && \
+    tar xvf "$MJPEG_SERVER_VER.tar.gz" && \
     mv mjpeg_cam_stream_server-* "mjpeg_cam_stream_server" && \
     cd "mjpeg_cam_stream_server" && \
     mkdir -p build/ && \
