@@ -11,13 +11,6 @@ RUN apt-get update && apt-get install -y \
     g++
 
 RUN apt-get update && apt-get install -y \
-    gdb \
-    vim
-
-RUN apt-get update && apt-get install -y \
-    libopencv-dev
-
-RUN apt-get update && apt-get install -y \
     libboost-program-options-dev
 
 # BUT installation
@@ -42,12 +35,10 @@ RUN cd /usr/src/ && \
 #
 # server compilation
 #
-RUN apt-get update && apt-get install -y \
-    unzip
-ENV MJPEG_SERVER_VER="v1.0.0"
-ENV MJPEG_SERVER_SHA="ad9eff8a24bee5e3a29b732f7ceb9de07604c48397d2616f0bc7dc3bbb080521"
+ENV MJPEG_SERVER_VER="v1.1.0"
+ENV MJPEG_SERVER_SHA="5f20be99651290291aac89e824484e873084eb5d5ae35af218f1619f133bb488"
 RUN cd /usr/src/ && \
-    wget -O "$MJPEG_SERVER_VER.zip" "https://github.com/el-bart/mjpeg_cam_stream_server/archive/refs/tags/$MJPEG_SERVER_VER.zip" && \
+    wget -O "$MJPEG_SERVER_VER.zip" "https://github.com/el-bart/mjpeg_cam_stream_server/archive/refs/tags/$MJPEG_SERVER_VER.tar.gz" && \
     sha256sum "$MJPEG_SERVER_VER.zip" && \
     [ "$(sha256sum < "$MJPEG_SERVER_VER.zip")" = "$MJPEG_SERVER_SHA  -" ] && \
     unzip "$MJPEG_SERVER_VER.zip" && \
@@ -66,7 +57,6 @@ FROM debian:12
 RUN apt-get update && apt-get dist-upgrade -y
 
 RUN apt-get update && apt-get install -y \
-    libopencv-videoio406 \
     libboost-program-options1.74.0
 
 COPY --from=server_builder /usr/local/bin/mjpeg_cam_stream_server /usr/local/bin/
