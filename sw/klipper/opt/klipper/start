@@ -123,4 +123,4 @@ do
 done
 
 # start the system
-exec docker-compose up --timeout 2 --build
+exec docker-compose up --timeout 2
