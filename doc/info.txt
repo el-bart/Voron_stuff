@@ -1,5 +1,9 @@
 # info
 
+## board
+* BTT Octopus 1.1
+* based on `STM32F446`
+
 ## sensors
 * chamber thermistor: semitec 103NT-4
 * accelerometer (external): ADXL345 (over SPI)
