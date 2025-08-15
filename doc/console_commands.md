@@ -6,6 +6,7 @@
 * `M114` - return current XYZE positions
 * `G28` - home all axis
 * `G90` - absolute positioning mode
+* `M115` - check firmware version (µC)
 
 ## move steppers around
 * `STEPPER_BUZZ STEPPER=stepper_x`
