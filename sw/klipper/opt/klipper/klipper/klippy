@@ -2,7 +2,7 @@
 set -eu -o pipefail
 
 printer_cfg="/mnt/config/printer.cfg"
-limit_power=0.5
+limit_power=0.7
 
 # ensure max_power for extruder is within the limits!!
 max_pwr=$(sed -n '/^\[extruder\]$/,/^\[.*\]$/p' "$printer_cfg"  | grep '^max_power: *' | awk '{ print $2 }')
