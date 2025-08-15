@@ -1,0 +1,19 @@
+#!/bin/bash
+set -eu -o pipefail
+
+printer_cfg="/mnt/config/printer.cfg"
+limit_power=0.5
+
+# ensure max_power for extruder is within the limits!!
+max_pwr=$(sed -n '/^\[extruder\]$/,/^\[.*\]$/p' "$printer_cfg"  | grep '^max_power: *' | awk '{ print $2 }')
+if [ "$(echo "$max_pwr <= $limit_power" | bc -ql)" != "1" ]
+then
+  echo "$0: extruder's max_power=$max_pwr, which is above max allowed $limit_power" >&2
+  exit 2
+fi
+
+exec /opt/klipper/klippy/klippy.py \
+  --input-tty "/mnt/run/klipper.tty" \
+  --api-server "/mnt/run/klipper.sock" \
+  --logfile "/mnt/logs/klipper.log" \
+  "$printer_cfg"

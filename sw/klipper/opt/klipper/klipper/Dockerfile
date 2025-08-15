@@ -40,8 +40,5 @@ RUN python3 -m venv venv && \
     venv/bin/python -m compileall "/opt/klipper/klippy" && \
     venv/bin/python "/opt/klipper/klippy/chelper/__init__.py"
 
-ENTRYPOINT ["python3", "/opt/klipper/klippy/klippy.py", \
-              "--input-tty", "/mnt/run/klipper.tty", \
-              "--api-server", "/mnt/run/klipper.sock", \
-              "--logfile", "/mnt/logs/klipper.log", \
-              "/mnt/config/printer.cfg" ]
+COPY klippy /usr/local/bin/
+ENTRYPOINT ["klippy"]
