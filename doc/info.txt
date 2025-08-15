@@ -3,6 +3,10 @@
 ## board
 * BTT Octopus 1.1
 * based on `STM32F446`
+* 4 heaters: HE0..HE3
+  * 24V supply
+  * (reportedly) 10A per steppers, 10A for bed, 10A for the rest
+* hotend heating is reportedly u
 
 ## sensors
 * chamber thermistor: semitec 103NT-4
