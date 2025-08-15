@@ -107,7 +107,7 @@ services:
 
   # only nginx has an access to/trom the outside world - all other containers are cut off
   nginx:
-    image: nginx:1.27
+    image: nginx:1.29
     # read_only: true # TODO: cannot be read-only atm, due to: [emerg] 1#1: mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
     restart: always
     volumes:
