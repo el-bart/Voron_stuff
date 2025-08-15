@@ -28,7 +28,7 @@
 ### heaters
 * [voron docs](https://docs.vorondesign.com/build/startup/#pid-tune-bed--hotend).
 * `TURN_OFF_HEATERS`
-* `M106 S64` - set PCF to 25%
+* `M106 S64` - set PCF (Part Cooling Fan) to 25%
 * `PID_CALIBRATE HEATER=extruder TARGET=250`
 * `PID_CALIBRATE HEATER=heater_bed TARGET=100`
 * `SAVE_CONFIG` to save new PID settings
