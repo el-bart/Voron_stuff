@@ -23,7 +23,7 @@ RUN git clone \
           "https://github.com/Klipper3d/klipper" \
           "/opt/klipper" && \
     cd "/opt/klipper" && \
-    git checkout --quiet "12cd1d9e81c32b26ccc319af1dfc3633438908f1"
+    git checkout --quiet "v0.13.0"
 
 RUN apt-get update && \
     apt-get install -y \
