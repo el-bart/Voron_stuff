@@ -21,6 +21,10 @@ else
   docker_run_flags+=("-e" "HOME=/tmp")
 fi
 
+# workaround to prevent fakeroot from handling
+# https://github.com/moby/moby/issues/45436
+docker_run_flags+=(--ulimit "nofile=1024")
+
 docker run \
   "${docker_run_flags[@]}" \
   --rm \
