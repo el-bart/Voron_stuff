@@ -96,8 +96,8 @@ $(GRAPHICS_DIR)/pcb.done: $(PCB)
 	$(SILENT)print_on_error kicad-cli pcb export drill --format gerber --generate-map --map-format svg --output "$(GRAPHICS_DIR)/" "$<"
 	$(SILENT)rm -f "$(GRAPHICS_DIR)"/*drl.gbr
 	$(SILENT)cd "$(GRAPHICS_DIR)" && \
-			mv *-NPTH-drl-drl_map.svg NPTH-drl_map.svg && \
-			mv *-PTH-drl-drl_map.svg  PTH-drl_map.svg
+			mv *-NPTH-drl_map.svg NPTH-drl_map.svg && \
+			mv *-PTH-drl_map.svg  PTH-drl_map.svg
 	$(SILENT)touch "$@"
 
 .PHONY: clean
