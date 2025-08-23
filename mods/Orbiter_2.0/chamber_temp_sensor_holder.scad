@@ -1,7 +1,7 @@
 include <m3d/all.scad>
 
-wall = 1.1;
-d_int = 2.99 + 0.05;
+wall = 1.0;
+d_int = 2.99 + 0.15;
 d_ext = d_int + 2*wall;
 over = 0.5;
 h = 15 - 5;
@@ -34,8 +34,13 @@ module profile_2d()
 
 module holder()
 {
-  linear_extrude(h)
-    profile_2d();
+  difference()
+  {
+    linear_extrude(h)
+      profile_2d();
+    translate([-d_ext/2, 5, h/2])
+      cube([d_ext, d_ext, h]);
+  }
 }
 
 
