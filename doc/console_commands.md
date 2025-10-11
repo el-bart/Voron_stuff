@@ -5,6 +5,7 @@
 * `RESTART` - restart `klipper`
 * `M114` - return current XYZE positions
 * `G28` - home all axis
+* `G32` - probe Z and calculate Z plane
 * `G90` - absolute positioning mode
 * `M115` - check firmware version (µC)
 
