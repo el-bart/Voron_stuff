@@ -1,3 +1,4 @@
+# pip's package has issues on Debian:13 - skipping for now
 FROM debian:12
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \

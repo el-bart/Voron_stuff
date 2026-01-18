@@ -1,7 +1,7 @@
 #
 # build env
 #
-FROM debian:12 as server_builder
+FROM debian:13 as server_builder
 RUN apt-get update && apt-get dist-upgrade -y
 
 RUN apt-get update && apt-get install -y \
@@ -35,8 +35,8 @@ RUN cd /usr/src/ && \
 #
 # server compilation
 #
-ENV MJPEG_SERVER_VER="v1.1.0"
-ENV MJPEG_SERVER_SHA="5f20be99651290291aac89e824484e873084eb5d5ae35af218f1619f133bb488"
+ENV MJPEG_SERVER_VER="v1.2.0"
+ENV MJPEG_SERVER_SHA="33a097e0db65b9ce512122ea6d89bf4f4564e2d06b92fc04529001101c649098"
 RUN cd /usr/src/ && \
     wget -O "$MJPEG_SERVER_VER.tar.gz" "https://github.com/el-bart/mjpeg_cam_stream_server/archive/refs/tags/$MJPEG_SERVER_VER.tar.gz" && \
     [ "$(sha256sum < "$MJPEG_SERVER_VER.tar.gz")" = "$MJPEG_SERVER_SHA  -" ] && \
@@ -52,11 +52,11 @@ RUN cd /usr/src/ && \
 #
 # runtime
 #
-FROM debian:12
+FROM debian:13
 RUN apt-get update && apt-get dist-upgrade -y
 
 RUN apt-get update && apt-get install -y \
-    libboost-program-options1.74.0
+    libboost-program-options1.83.0
 
 COPY --from=server_builder /usr/local/bin/mjpeg_cam_stream_server /usr/local/bin/
 ENTRYPOINT ["mjpeg_cam_stream_server"]

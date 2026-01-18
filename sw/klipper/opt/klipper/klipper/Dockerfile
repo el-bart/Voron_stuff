@@ -1,3 +1,4 @@
+# does not compiler under Debian:12 - skipping for now
 FROM debian:12
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
