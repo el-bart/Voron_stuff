@@ -1,1 +1,1 @@
-print has been is paused
+print has been paused
