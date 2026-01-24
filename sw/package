@@ -4,6 +4,8 @@ set -eu -o pipefail
 app_dir=$(dirname "$(readlink -e "$0")")
 cd "$app_dir"
 
+make -C "klipper/opt/klipper/klipper/audio" all
+
 rm -rf build
 mkdir build
 dpkg-deb \
