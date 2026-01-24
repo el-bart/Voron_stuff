@@ -41,5 +41,9 @@ RUN python3 -m venv venv && \
     venv/bin/python -m compileall "/opt/klipper/klippy" && \
     venv/bin/python "/opt/klipper/klippy/chelper/__init__.py"
 
+RUN mkdir -p /usr/local/share/klipper/audio
+COPY audio/*.wav /usr/local/share/klipper/audio/
+COPY async_play /usr/local/bin/
+
 COPY klippy /usr/local/bin/
 ENTRYPOINT ["klippy"]
