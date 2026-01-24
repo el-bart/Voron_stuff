@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+app=$(basename "$0")
+
+if [ $# -ne 1 ]
+then
+  echo "$app {pause|resume|print_start|print_end}" >&2
+  exit 2
+fi
+name=$1
+shift 1
+
+case "$name" in
+  pause) ;;
+  resume) ;;
+  print_start) ;;
+  print_end) ;;
+  *)
+    echo "$app: unknown command: '$name'" >&2
+    exit 2
+  ;;
+esac
+
+set -x
+cd /mnt/audio
+card=$(aplay -l | grep ^card | grep "USB Audio" | awk '{ print $2 }' | tr -d :)
+play -D "plughw:$card,0" "on_$name.wav" &
+#play -D plughw:4,0 "on_$name.wav" &
+#mpg123 -q "on_$name.mp3" &
