@@ -31,7 +31,7 @@ g0 x340 y340
 g0 x340 y10
 ; jog Z
 g0 z10
-g0 z300
+g0 z260
 g0 z155 ; center
 EOF
 done
