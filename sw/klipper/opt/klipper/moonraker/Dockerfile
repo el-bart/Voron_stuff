@@ -29,6 +29,8 @@ RUN apt-get update && \
       && \
     apt-get clean
 
+# for checking new versions see:
+# https://pypi.org/project/moonraker/
 RUN python3 -m venv venv && \
     venv/bin/pip install moonraker==0.9.3
 
