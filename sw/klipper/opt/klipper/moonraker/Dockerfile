@@ -1,5 +1,4 @@
-# pip's package has issues on Debian:13 - skipping for now
-FROM debian:12
+FROM debian:13
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
@@ -32,7 +31,7 @@ RUN apt-get update && \
 # for checking new versions see:
 # https://pypi.org/project/moonraker/
 RUN python3 -m venv venv && \
-    venv/bin/pip install moonraker==0.9.3
+    venv/bin/pip install moonraker==0.10.0
 
 # needed for /opt/klipper/docs...
 RUN apt-get update && \
